@@ -1,0 +1,102 @@
+INFO:root:Namespace(model_name='SASRec', model_mode='')
+INFO:root:--------------------------------------------- BEGIN: 2025-12-24 21:10:17 ---------------------------------------------
+INFO:root:
+===================================
+ Arguments          | Values       
+===================================
+ batch_size         | 8192        
+ data_appendix      |             
+ dataset            | MovieLens_1M
+ dropout            | 0           
+ early_stop         | 10          
+ emb_size           | 64          
+ epoch              | 100         
+ eval_batch_size    | 256         
+ gpu                | 0           
+ history_max        | 20          
+ l2                 | 0           
+ lr                 | 0.001       
+ main_metric        |             
+ num_heads          | 4           
+ num_layers         | 2           
+ num_neg            | 1           
+ num_workers        | 16          
+ optimizer          | Adam        
+ random_seed        | 0           
+ save_final_results | 1           
+ test_all           | 0           
+ topk               | 5,10,20,50  
+===================================
+INFO:root:Device: cuda
+INFO:root:Load corpus from data/MovieLens_1M/SeqReader.pkl
+INFO:root:#params: 243520
+INFO:root:SASRec(
+  (i_embeddings): Embedding(3126, 64)
+  (p_embeddings): Embedding(21, 64)
+  (transformer_block): ModuleList(
+    (0-1): 2 x TransformerLayer(
+      (masked_attn_head): MultiHeadAttention(
+        (q_linear): Linear(in_features=64, out_features=64, bias=True)
+        (k_linear): Linear(in_features=64, out_features=64, bias=True)
+        (v_linear): Linear(in_features=64, out_features=64, bias=True)
+      )
+      (layer_norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      (dropout1): Dropout(p=0, inplace=False)
+      (linear1): Linear(in_features=64, out_features=64, bias=True)
+      (linear2): Linear(in_features=64, out_features=64, bias=True)
+      (layer_norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      (dropout2): Dropout(p=0, inplace=False)
+    )
+  )
+)
+INFO:root:Test Before Training: (HR@5:0.0386,NDCG@5:0.0227,HR@10:0.0915,NDCG@10:0.0397,HR@20:0.1889,NDCG@20:0.0640,HR@50:0.4934,NDCG@50:0.1234)
+INFO:root:Optimizer: Adam
+INFO:root:Epoch 1     loss=0.4070 [3.7 s]	dev=(HR@5:0.3329,NDCG@5:0.2273) [0.4 s] *
+INFO:root:Epoch 2     loss=0.3177 [2.8 s]	dev=(HR@5:0.3724,NDCG@5:0.2516) [0.4 s] *
+INFO:root:Epoch 3     loss=0.2518 [2.5 s]	dev=(HR@5:0.4270,NDCG@5:0.2864) [0.4 s] *
+INFO:root:Epoch 4     loss=0.2020 [2.5 s]	dev=(HR@5:0.4625,NDCG@5:0.3220) [0.4 s] *
+INFO:root:Epoch 5     loss=0.1712 [2.6 s]	dev=(HR@5:0.4801,NDCG@5:0.3356) [0.4 s] *
+INFO:root:Epoch 6     loss=0.1546 [2.5 s]	dev=(HR@5:0.4957,NDCG@5:0.3492) [0.4 s] *
+INFO:root:Epoch 7     loss=0.1429 [2.7 s]	dev=(HR@5:0.5012,NDCG@5:0.3519) [0.4 s] *
+INFO:root:Epoch 8     loss=0.1350 [2.8 s]	dev=(HR@5:0.5023,NDCG@5:0.3539) [0.4 s] *
+INFO:root:Epoch 9     loss=0.1281 [2.8 s]	dev=(HR@5:0.5187,NDCG@5:0.3645) [0.4 s] *
+INFO:root:Epoch 10    loss=0.1221 [2.9 s]	dev=(HR@5:0.5098,NDCG@5:0.3626) [0.4 s]
+INFO:root:Epoch 11    loss=0.1177 [2.8 s]	dev=(HR@5:0.5160,NDCG@5:0.3629) [0.4 s]
+INFO:root:Epoch 12    loss=0.1141 [2.8 s]	dev=(HR@5:0.5195,NDCG@5:0.3697) [0.5 s] *
+INFO:root:Epoch 13    loss=0.1100 [2.6 s]	dev=(HR@5:0.5222,NDCG@5:0.3709) [0.4 s] *
+INFO:root:Epoch 14    loss=0.1077 [2.8 s]	dev=(HR@5:0.5277,NDCG@5:0.3742) [0.4 s] *
+INFO:root:Epoch 15    loss=0.1055 [2.4 s]	dev=(HR@5:0.5297,NDCG@5:0.3739) [0.4 s]
+INFO:root:Epoch 16    loss=0.1024 [2.9 s]	dev=(HR@5:0.5269,NDCG@5:0.3728) [0.5 s]
+INFO:root:Epoch 17    loss=0.1001 [2.9 s]	dev=(HR@5:0.5238,NDCG@5:0.3722) [0.4 s]
+INFO:root:Epoch 18    loss=0.0986 [2.8 s]	dev=(HR@5:0.5246,NDCG@5:0.3745) [0.4 s] *
+INFO:root:Epoch 19    loss=0.0967 [2.7 s]	dev=(HR@5:0.5230,NDCG@5:0.3714) [0.4 s]
+INFO:root:Epoch 20    loss=0.0947 [2.9 s]	dev=(HR@5:0.5156,NDCG@5:0.3689) [0.4 s]
+INFO:root:Epoch 21    loss=0.0930 [2.6 s]	dev=(HR@5:0.5234,NDCG@5:0.3740) [0.4 s]
+INFO:root:Epoch 22    loss=0.0918 [2.7 s]	dev=(HR@5:0.5183,NDCG@5:0.3734) [0.4 s]
+INFO:root:Epoch 23    loss=0.0898 [2.6 s]	dev=(HR@5:0.5230,NDCG@5:0.3764) [0.4 s] *
+INFO:root:Epoch 24    loss=0.0877 [2.6 s]	dev=(HR@5:0.5254,NDCG@5:0.3784) [0.4 s] *
+INFO:root:Epoch 25    loss=0.0877 [2.5 s]	dev=(HR@5:0.5191,NDCG@5:0.3737) [0.4 s]
+INFO:root:Epoch 26    loss=0.0858 [2.8 s]	dev=(HR@5:0.5254,NDCG@5:0.3817) [0.4 s] *
+INFO:root:Epoch 27    loss=0.0850 [2.4 s]	dev=(HR@5:0.5222,NDCG@5:0.3765) [0.4 s]
+INFO:root:Epoch 28    loss=0.0842 [2.7 s]	dev=(HR@5:0.5301,NDCG@5:0.3797) [0.5 s]
+INFO:root:Epoch 29    loss=0.0836 [2.6 s]	dev=(HR@5:0.5141,NDCG@5:0.3735) [0.4 s]
+INFO:root:Epoch 30    loss=0.0814 [2.9 s]	dev=(HR@5:0.5250,NDCG@5:0.3803) [0.4 s]
+INFO:root:Epoch 31    loss=0.0809 [2.8 s]	dev=(HR@5:0.5183,NDCG@5:0.3739) [0.4 s]
+INFO:root:Epoch 32    loss=0.0801 [2.5 s]	dev=(HR@5:0.5176,NDCG@5:0.3775) [0.4 s]
+INFO:root:Epoch 33    loss=0.0790 [2.7 s]	dev=(HR@5:0.5254,NDCG@5:0.3778) [0.4 s]
+INFO:root:Epoch 34    loss=0.0786 [2.7 s]	dev=(HR@5:0.5230,NDCG@5:0.3727) [0.4 s]
+INFO:root:Epoch 35    loss=0.0775 [2.5 s]	dev=(HR@5:0.5269,NDCG@5:0.3769) [0.4 s]
+INFO:root:Early stop at 35 based on dev result.
+INFO:root:
+Best Iter(dev)=   26	 dev=(HR@5:0.5254,NDCG@5:0.3817) [109.5 s] 
+INFO:root:Load model from ../model/SASRec/SASRec__MovieLens_1M__0__lr=0.001__l2=0__emb_size=64__num_layers=2__num_heads=4.pt
+INFO:root:
+Dev  After Training: (HR@5:0.5254,NDCG@5:0.3817,HR@10:0.6788,NDCG@10:0.4315,HR@20:0.8173,NDCG@20:0.4667,HR@50:0.9532,NDCG@50:0.4942)
+INFO:root:
+Test After Training: (HR@5:0.5285,NDCG@5:0.3889,HR@10:0.6747,NDCG@10:0.4361,HR@20:0.8128,NDCG@20:0.4710,HR@50:0.9589,NDCG@50:0.5002)
+INFO:root:Saving top-100 recommendation results to: ../log/SASRec/SASRec__MovieLens_1M__0__lr=0/rec-SASRec-dev.csv
+INFO:root:dev Prediction results saved!
+INFO:root:Saving top-100 recommendation results to: ../log/SASRec/SASRec__MovieLens_1M__0__lr=0/rec-SASRec-test.csv
+INFO:root:test Prediction results saved!
+INFO:root:
+--------------------------------------------- END: 2025-12-24 21:12:11 ---------------------------------------------

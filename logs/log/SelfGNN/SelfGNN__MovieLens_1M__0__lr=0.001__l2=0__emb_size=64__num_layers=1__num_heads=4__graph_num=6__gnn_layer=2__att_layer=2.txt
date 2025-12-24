@@ -1,0 +1,164 @@
+INFO:root:Namespace(model_name='SelfGNN', model_mode='')
+INFO:root:--------------------------------------------- BEGIN: 2025-12-24 21:02:36 ---------------------------------------------
+INFO:root:
+===================================
+ Arguments          | Values       
+===================================
+ att_layer          | 2           
+ batch_size         | 8192        
+ data_appendix      |             
+ dataset            | MovieLens_1M
+ dropout            | 0           
+ early_stop         | 10          
+ emb_size           | 64          
+ epoch              | 100         
+ eval_batch_size    | 256         
+ gnn_layer          | 2           
+ gpu                | 0           
+ graph_num          | 6           
+ history_max        | 20          
+ l2                 | 0           
+ lr                 | 0.001       
+ main_metric        |             
+ max_time           | 100         
+ num_heads          | 4           
+ num_layers         | 1           
+ num_neg            | 1           
+ num_workers        | 16          
+ optimizer          | Adam        
+ pos_length         | 20          
+ query_dim          | 64          
+ random_seed        | 0           
+ save_final_results | 1           
+ ssl_weight         | 1e-06       
+ test_all           | 0           
+ time_periods       | 6           
+ topk               | 5,10,20,50  
+===================================
+INFO:root:Device: cuda
+INFO:root:Reading data from "data/", dataset = "MovieLens_1M" 
+INFO:root:Counting dataset statistics...
+INFO:root:"# user": 6032, "# item": 3125, "# entry": 574197
+INFO:root:Appending history info...
+INFO:root:Save corpus to data/MovieLens_1M/SeqReader.pkl
+INFO:root:#params: 3663425
+INFO:root:SelfGNN(
+  (user_embeddings): ModuleList(
+    (0-5): 6 x Embedding(6033, 64)
+  )
+  (item_embeddings): ModuleList(
+    (0-5): 6 x Embedding(3126, 64)
+  )
+  (pos_embeddings): Embedding(20, 64)
+  (time_embeddings): Embedding(101, 64)
+  (time_projections): ModuleList(
+    (0-5): 6 x Linear(in_features=64, out_features=64, bias=True)
+  )
+  (graph_gru): GRU(64, 64, batch_first=True)
+  (user_graph_attention): TransformerLayer(
+    (masked_attn_head): MultiHeadAttention(
+      (k_linear): Linear(in_features=64, out_features=64, bias=True)
+      (v_linear): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (layer_norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+    (dropout1): Dropout(p=0, inplace=False)
+    (linear1): Linear(in_features=64, out_features=64, bias=True)
+    (linear2): Linear(in_features=64, out_features=64, bias=True)
+    (layer_norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+    (dropout2): Dropout(p=0, inplace=False)
+  )
+  (item_graph_attention): TransformerLayer(
+    (masked_attn_head): MultiHeadAttention(
+      (k_linear): Linear(in_features=64, out_features=64, bias=True)
+      (v_linear): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (layer_norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+    (dropout1): Dropout(p=0, inplace=False)
+    (linear1): Linear(in_features=64, out_features=64, bias=True)
+    (linear2): Linear(in_features=64, out_features=64, bias=True)
+    (layer_norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+    (dropout2): Dropout(p=0, inplace=False)
+  )
+  (sequence_attentions): ModuleList(
+    (0-1): 2 x TransformerLayer(
+      (masked_attn_head): MultiHeadAttention(
+        (q_linear): Linear(in_features=64, out_features=64, bias=True)
+        (k_linear): Linear(in_features=64, out_features=64, bias=True)
+        (v_linear): Linear(in_features=64, out_features=64, bias=True)
+      )
+      (layer_norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      (dropout1): Dropout(p=0, inplace=False)
+      (linear1): Linear(in_features=64, out_features=64, bias=True)
+      (linear2): Linear(in_features=64, out_features=64, bias=True)
+      (layer_norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      (dropout2): Dropout(p=0, inplace=False)
+    )
+  )
+  (meta_fc1): Linear(in_features=192, out_features=64, bias=True)
+  (meta_fc2): Linear(in_features=64, out_features=1, bias=True)
+  (user_ln): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+  (item_ln): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+  (seq_ln): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+)
+INFO:root:Test Before Training: (HR@5:0.0084,NDCG@5:0.0044,HR@10:0.0153,NDCG@10:0.0066,HR@20:0.0331,NDCG@20:0.0110,HR@50:0.1284,NDCG@50:0.0294)
+INFO:root:Optimizer: Adam
+INFO:root:Epoch 1     loss=0.3593 [10.3 s]	dev=(HR@5:0.3536,NDCG@5:0.2503) [0.5 s] *
+INFO:root:Epoch 2     loss=0.2106 [9.2 s]	dev=(HR@5:0.4485,NDCG@5:0.3256) [0.5 s] *
+INFO:root:Epoch 3     loss=0.1595 [9.2 s]	dev=(HR@5:0.4988,NDCG@5:0.3710) [0.5 s] *
+INFO:root:Epoch 4     loss=0.1385 [9.1 s]	dev=(HR@5:0.5129,NDCG@5:0.3874) [0.5 s] *
+INFO:root:Epoch 5     loss=0.1275 [9.3 s]	dev=(HR@5:0.5164,NDCG@5:0.3892) [0.5 s] *
+INFO:root:Epoch 6     loss=0.1195 [9.3 s]	dev=(HR@5:0.5226,NDCG@5:0.3963) [0.6 s] *
+INFO:root:Epoch 7     loss=0.1131 [9.2 s]	dev=(HR@5:0.5215,NDCG@5:0.3935) [0.6 s]
+INFO:root:Epoch 8     loss=0.1079 [9.3 s]	dev=(HR@5:0.5332,NDCG@5:0.3998) [0.5 s] *
+INFO:root:Epoch 9     loss=0.1042 [9.2 s]	dev=(HR@5:0.5328,NDCG@5:0.4028) [0.5 s] *
+INFO:root:Epoch 10    loss=0.0998 [9.2 s]	dev=(HR@5:0.5234,NDCG@5:0.3976) [0.6 s]
+INFO:root:Epoch 11    loss=0.0969 [9.2 s]	dev=(HR@5:0.5285,NDCG@5:0.3966) [0.5 s]
+INFO:root:Epoch 12    loss=0.0940 [9.2 s]	dev=(HR@5:0.5312,NDCG@5:0.4034) [0.5 s] *
+INFO:root:Epoch 13    loss=0.0912 [9.3 s]	dev=(HR@5:0.5340,NDCG@5:0.4023) [0.6 s]
+INFO:root:Epoch 14    loss=0.0893 [9.2 s]	dev=(HR@5:0.5347,NDCG@5:0.4067) [0.5 s] *
+INFO:root:Epoch 15    loss=0.0876 [9.0 s]	dev=(HR@5:0.5410,NDCG@5:0.4130) [0.6 s] *
+INFO:root:Epoch 16    loss=0.0849 [9.1 s]	dev=(HR@5:0.5383,NDCG@5:0.4131) [0.5 s] *
+INFO:root:Epoch 17    loss=0.0833 [9.2 s]	dev=(HR@5:0.5355,NDCG@5:0.4126) [0.6 s]
+INFO:root:Epoch 18    loss=0.0819 [9.3 s]	dev=(HR@5:0.5394,NDCG@5:0.4071) [0.6 s]
+INFO:root:Epoch 19    loss=0.0802 [9.2 s]	dev=(HR@5:0.5394,NDCG@5:0.4088) [0.7 s]
+INFO:root:Epoch 20    loss=0.0793 [9.7 s]	dev=(HR@5:0.5445,NDCG@5:0.4134) [0.7 s] *
+INFO:root:Epoch 21    loss=0.0778 [9.8 s]	dev=(HR@5:0.5301,NDCG@5:0.4004) [0.7 s]
+INFO:root:Epoch 22    loss=0.0768 [9.3 s]	dev=(HR@5:0.5468,NDCG@5:0.4117) [0.6 s]
+INFO:root:Epoch 23    loss=0.0746 [9.2 s]	dev=(HR@5:0.5410,NDCG@5:0.4087) [0.5 s]
+INFO:root:Epoch 24    loss=0.0740 [9.2 s]	dev=(HR@5:0.5379,NDCG@5:0.4106) [0.6 s]
+INFO:root:Epoch 25    loss=0.0736 [9.3 s]	dev=(HR@5:0.5531,NDCG@5:0.4151) [0.5 s] *
+INFO:root:Epoch 26    loss=0.0714 [9.2 s]	dev=(HR@5:0.5386,NDCG@5:0.4097) [0.5 s]
+INFO:root:Epoch 27    loss=0.0711 [9.2 s]	dev=(HR@5:0.5340,NDCG@5:0.4011) [0.5 s]
+INFO:root:Epoch 28    loss=0.0705 [9.2 s]	dev=(HR@5:0.5429,NDCG@5:0.4089) [0.5 s]
+INFO:root:Epoch 29    loss=0.0698 [9.2 s]	dev=(HR@5:0.5457,NDCG@5:0.4120) [0.5 s]
+INFO:root:Epoch 30    loss=0.0680 [9.2 s]	dev=(HR@5:0.5464,NDCG@5:0.4165) [0.6 s] *
+INFO:root:Epoch 31    loss=0.0682 [9.2 s]	dev=(HR@5:0.5500,NDCG@5:0.4157) [0.5 s]
+INFO:root:Epoch 32    loss=0.0673 [9.3 s]	dev=(HR@5:0.5558,NDCG@5:0.4128) [0.5 s]
+INFO:root:Epoch 33    loss=0.0664 [9.2 s]	dev=(HR@5:0.5554,NDCG@5:0.4156) [0.5 s]
+INFO:root:Epoch 34    loss=0.0660 [9.2 s]	dev=(HR@5:0.5496,NDCG@5:0.4174) [0.5 s] *
+INFO:root:Epoch 35    loss=0.0652 [9.1 s]	dev=(HR@5:0.5504,NDCG@5:0.4154) [0.5 s]
+INFO:root:Epoch 36    loss=0.0642 [9.3 s]	dev=(HR@5:0.5410,NDCG@5:0.4084) [0.5 s]
+INFO:root:Epoch 37    loss=0.0639 [9.2 s]	dev=(HR@5:0.5585,NDCG@5:0.4218) [0.5 s] *
+INFO:root:Epoch 38    loss=0.0627 [9.1 s]	dev=(HR@5:0.5449,NDCG@5:0.4040) [0.5 s]
+INFO:root:Epoch 39    loss=0.0625 [9.1 s]	dev=(HR@5:0.5550,NDCG@5:0.4115) [0.5 s]
+INFO:root:Epoch 40    loss=0.0626 [9.3 s]	dev=(HR@5:0.5457,NDCG@5:0.4064) [0.5 s]
+INFO:root:Epoch 41    loss=0.0624 [9.2 s]	dev=(HR@5:0.5379,NDCG@5:0.4088) [0.5 s]
+INFO:root:Epoch 42    loss=0.0619 [9.2 s]	dev=(HR@5:0.5453,NDCG@5:0.4065) [0.5 s]
+INFO:root:Epoch 43    loss=0.0612 [9.1 s]	dev=(HR@5:0.5437,NDCG@5:0.4063) [0.5 s]
+INFO:root:Epoch 44    loss=0.0606 [9.2 s]	dev=(HR@5:0.5546,NDCG@5:0.4131) [0.5 s]
+INFO:root:Epoch 45    loss=0.0595 [9.0 s]	dev=(HR@5:0.5558,NDCG@5:0.4116) [0.5 s]
+INFO:root:Epoch 46    loss=0.0601 [9.3 s]	dev=(HR@5:0.5433,NDCG@5:0.4111) [0.5 s]
+INFO:root:Early stop at 46 based on dev result.
+INFO:root:
+Best Iter(dev)=   37	 dev=(HR@5:0.5585,NDCG@5:0.4218) [451.3 s] 
+INFO:root:Load model from ../model/SelfGNN/SelfGNN__MovieLens_1M__0__lr=0.001__l2=0__emb_size=64__num_layers=1__num_heads=4__graph_num=6__gnn_layer=2__att_layer=2.pt
+INFO:root:
+Dev  After Training: (HR@5:0.5585,NDCG@5:0.4218,HR@10:0.6881,NDCG@10:0.4635,HR@20:0.8189,NDCG@20:0.4967,HR@50:0.9528,NDCG@50:0.5237)
+INFO:root:
+Test After Training: (HR@5:0.5644,NDCG@5:0.4275,HR@10:0.6942,NDCG@10:0.4697,HR@20:0.8180,NDCG@20:0.5008,HR@50:0.9509,NDCG@50:0.5277)
+INFO:root:Saving top-100 recommendation results to: ../log/SelfGNN/SelfGNN__MovieLens_1M__0__lr=0/rec-SelfGNN-dev.csv
+INFO:root:dev Prediction results saved!
+INFO:root:Saving top-100 recommendation results to: ../log/SelfGNN/SelfGNN__MovieLens_1M__0__lr=0/rec-SelfGNN-test.csv
+INFO:root:test Prediction results saved!
+INFO:root:
+--------------------------------------------- END: 2025-12-24 21:10:14 ---------------------------------------------

@@ -1,0 +1,155 @@
+INFO:root:Namespace(model_name='SelfGNN', model_mode='')
+INFO:root:--------------------------------------------- BEGIN: 2025-12-24 20:52:43 ---------------------------------------------
+INFO:root:
+===========================================
+ Arguments          | Values               
+===========================================
+ att_layer          | 2                   
+ batch_size         | 8192                
+ data_appendix      |                     
+ dataset            | Grocery_and_Gourm...
+ dropout            | 0                   
+ early_stop         | 10                  
+ emb_size           | 64                  
+ epoch              | 100                 
+ eval_batch_size    | 256                 
+ gnn_layer          | 2                   
+ gpu                | 0                   
+ graph_num          | 6                   
+ history_max        | 20                  
+ l2                 | 0                   
+ lr                 | 0.001               
+ main_metric        |                     
+ max_time           | 100                 
+ num_heads          | 4                   
+ num_layers         | 1                   
+ num_neg            | 1                   
+ num_workers        | 16                  
+ optimizer          | Adam                
+ pos_length         | 20                  
+ query_dim          | 64                  
+ random_seed        | 0                   
+ save_final_results | 1                   
+ ssl_weight         | 1e-06               
+ test_all           | 0                   
+ time_periods       | 6                   
+ topk               | 5,10,20,50          
+===========================================
+INFO:root:Device: cuda
+INFO:root:Load corpus from data/Grocery_and_Gourmet_Food/SeqReader.pkl
+INFO:root:#params: 9130433
+INFO:root:SelfGNN(
+  (user_embeddings): ModuleList(
+    (0-5): 6 x Embedding(14682, 64)
+  )
+  (item_embeddings): ModuleList(
+    (0-5): 6 x Embedding(8714, 64)
+  )
+  (pos_embeddings): Embedding(20, 64)
+  (time_embeddings): Embedding(101, 64)
+  (time_projections): ModuleList(
+    (0-5): 6 x Linear(in_features=64, out_features=64, bias=True)
+  )
+  (graph_gru): GRU(64, 64, batch_first=True)
+  (user_graph_attention): TransformerLayer(
+    (masked_attn_head): MultiHeadAttention(
+      (k_linear): Linear(in_features=64, out_features=64, bias=True)
+      (v_linear): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (layer_norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+    (dropout1): Dropout(p=0, inplace=False)
+    (linear1): Linear(in_features=64, out_features=64, bias=True)
+    (linear2): Linear(in_features=64, out_features=64, bias=True)
+    (layer_norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+    (dropout2): Dropout(p=0, inplace=False)
+  )
+  (item_graph_attention): TransformerLayer(
+    (masked_attn_head): MultiHeadAttention(
+      (k_linear): Linear(in_features=64, out_features=64, bias=True)
+      (v_linear): Linear(in_features=64, out_features=64, bias=True)
+    )
+    (layer_norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+    (dropout1): Dropout(p=0, inplace=False)
+    (linear1): Linear(in_features=64, out_features=64, bias=True)
+    (linear2): Linear(in_features=64, out_features=64, bias=True)
+    (layer_norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+    (dropout2): Dropout(p=0, inplace=False)
+  )
+  (sequence_attentions): ModuleList(
+    (0-1): 2 x TransformerLayer(
+      (masked_attn_head): MultiHeadAttention(
+        (q_linear): Linear(in_features=64, out_features=64, bias=True)
+        (k_linear): Linear(in_features=64, out_features=64, bias=True)
+        (v_linear): Linear(in_features=64, out_features=64, bias=True)
+      )
+      (layer_norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      (dropout1): Dropout(p=0, inplace=False)
+      (linear1): Linear(in_features=64, out_features=64, bias=True)
+      (linear2): Linear(in_features=64, out_features=64, bias=True)
+      (layer_norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      (dropout2): Dropout(p=0, inplace=False)
+    )
+  )
+  (meta_fc1): Linear(in_features=192, out_features=64, bias=True)
+  (meta_fc2): Linear(in_features=64, out_features=1, bias=True)
+  (user_ln): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+  (item_ln): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+  (seq_ln): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+)
+INFO:root:Test Before Training: (HR@5:0.0381,NDCG@5:0.0225,HR@10:0.0784,NDCG@10:0.0353,HR@20:0.1616,NDCG@20:0.0560,HR@50:0.4313,NDCG@50:0.1086)
+INFO:root:Optimizer: Adam
+INFO:root:Epoch 1     loss=0.5776 [7.7 s]	dev=(HR@5:0.2499,NDCG@5:0.1675) [1.2 s] *
+INFO:root:Epoch 2     loss=0.3959 [6.6 s]	dev=(HR@5:0.3150,NDCG@5:0.2130) [1.1 s] *
+INFO:root:Epoch 3     loss=0.3039 [6.7 s]	dev=(HR@5:0.3074,NDCG@5:0.2061) [1.1 s]
+INFO:root:Epoch 4     loss=0.2064 [6.6 s]	dev=(HR@5:0.2775,NDCG@5:0.1862) [1.0 s]
+INFO:root:Epoch 5     loss=0.1537 [6.6 s]	dev=(HR@5:0.2936,NDCG@5:0.1999) [1.2 s]
+INFO:root:Epoch 6     loss=0.1255 [6.7 s]	dev=(HR@5:0.3026,NDCG@5:0.2096) [1.2 s]
+INFO:root:Epoch 7     loss=0.1058 [6.7 s]	dev=(HR@5:0.2950,NDCG@5:0.2021) [1.1 s]
+INFO:root:Epoch 8     loss=0.0916 [6.6 s]	dev=(HR@5:0.3026,NDCG@5:0.2095) [1.2 s]
+INFO:root:Epoch 9     loss=0.0791 [6.6 s]	dev=(HR@5:0.2985,NDCG@5:0.2064) [1.2 s]
+INFO:root:Epoch 10    loss=0.0743 [6.7 s]	dev=(HR@5:0.3084,NDCG@5:0.2125) [1.2 s]
+INFO:root:Epoch 11    loss=0.0677 [6.6 s]	dev=(HR@5:0.3165,NDCG@5:0.2182) [1.1 s] *
+INFO:root:Epoch 12    loss=0.0618 [6.6 s]	dev=(HR@5:0.3190,NDCG@5:0.2218) [1.1 s] *
+INFO:root:Epoch 13    loss=0.0609 [6.6 s]	dev=(HR@5:0.3184,NDCG@5:0.2216) [1.2 s]
+INFO:root:Epoch 14    loss=0.0553 [6.6 s]	dev=(HR@5:0.3235,NDCG@5:0.2256) [1.1 s] *
+INFO:root:Epoch 15    loss=0.0529 [6.6 s]	dev=(HR@5:0.3210,NDCG@5:0.2235) [1.2 s]
+INFO:root:Epoch 16    loss=0.0483 [6.7 s]	dev=(HR@5:0.3166,NDCG@5:0.2222) [1.1 s]
+INFO:root:Epoch 17    loss=0.0446 [6.6 s]	dev=(HR@5:0.3250,NDCG@5:0.2260) [1.1 s] *
+INFO:root:Epoch 18    loss=0.0435 [6.6 s]	dev=(HR@5:0.3235,NDCG@5:0.2269) [1.1 s] *
+INFO:root:Epoch 19    loss=0.0429 [6.7 s]	dev=(HR@5:0.3227,NDCG@5:0.2264) [1.2 s]
+INFO:root:Epoch 20    loss=0.0406 [6.6 s]	dev=(HR@5:0.3291,NDCG@5:0.2332) [1.2 s] *
+INFO:root:Epoch 21    loss=0.0383 [6.6 s]	dev=(HR@5:0.3218,NDCG@5:0.2243) [1.1 s]
+INFO:root:Epoch 22    loss=0.0385 [6.7 s]	dev=(HR@5:0.3263,NDCG@5:0.2296) [1.2 s]
+INFO:root:Epoch 23    loss=0.0375 [6.7 s]	dev=(HR@5:0.3330,NDCG@5:0.2346) [0.9 s] *
+INFO:root:Epoch 24    loss=0.0343 [6.6 s]	dev=(HR@5:0.3302,NDCG@5:0.2336) [1.1 s]
+INFO:root:Epoch 25    loss=0.0345 [6.6 s]	dev=(HR@5:0.3263,NDCG@5:0.2292) [1.1 s]
+INFO:root:Epoch 26    loss=0.0333 [6.6 s]	dev=(HR@5:0.3231,NDCG@5:0.2280) [1.0 s]
+INFO:root:Epoch 27    loss=0.0331 [6.6 s]	dev=(HR@5:0.3337,NDCG@5:0.2362) [1.2 s] *
+INFO:root:Epoch 28    loss=0.0332 [6.7 s]	dev=(HR@5:0.3306,NDCG@5:0.2345) [1.2 s]
+INFO:root:Epoch 29    loss=0.0306 [6.7 s]	dev=(HR@5:0.3345,NDCG@5:0.2376) [1.1 s] *
+INFO:root:Epoch 30    loss=0.0311 [6.6 s]	dev=(HR@5:0.3322,NDCG@5:0.2356) [1.1 s]
+INFO:root:Epoch 31    loss=0.0290 [6.6 s]	dev=(HR@5:0.3349,NDCG@5:0.2384) [1.2 s] *
+INFO:root:Epoch 32    loss=0.0285 [6.7 s]	dev=(HR@5:0.3378,NDCG@5:0.2423) [1.1 s] *
+INFO:root:Epoch 33    loss=0.0299 [6.6 s]	dev=(HR@5:0.3327,NDCG@5:0.2361) [1.1 s]
+INFO:root:Epoch 34    loss=0.0290 [6.7 s]	dev=(HR@5:0.3383,NDCG@5:0.2415) [1.1 s]
+INFO:root:Epoch 35    loss=0.0294 [6.7 s]	dev=(HR@5:0.3297,NDCG@5:0.2330) [1.2 s]
+INFO:root:Epoch 36    loss=0.0278 [6.7 s]	dev=(HR@5:0.3357,NDCG@5:0.2396) [1.2 s]
+INFO:root:Epoch 37    loss=0.0274 [6.8 s]	dev=(HR@5:0.3357,NDCG@5:0.2378) [1.1 s]
+INFO:root:Epoch 38    loss=0.0268 [6.7 s]	dev=(HR@5:0.3321,NDCG@5:0.2342) [1.2 s]
+INFO:root:Epoch 39    loss=0.0248 [6.7 s]	dev=(HR@5:0.3357,NDCG@5:0.2378) [1.2 s]
+INFO:root:Epoch 40    loss=0.0229 [6.7 s]	dev=(HR@5:0.3289,NDCG@5:0.2332) [1.0 s]
+INFO:root:Epoch 41    loss=0.0240 [6.7 s]	dev=(HR@5:0.3329,NDCG@5:0.2363) [1.2 s]
+INFO:root:Early stop at 41 based on dev result.
+INFO:root:
+Best Iter(dev)=   32	 dev=(HR@5:0.3378,NDCG@5:0.2423) [321.2 s] 
+INFO:root:Load model from ../model/SelfGNN/SelfGNN__Grocery_and_Gourmet_Food__0__lr=0.001__l2=0__emb_size=64__num_layers=1__num_heads=4__graph_num=6__gnn_layer=2__att_layer=2.pt
+INFO:root:
+Dev  After Training: (HR@5:0.3378,NDCG@5:0.2423,HR@10:0.4414,NDCG@10:0.2758,HR@20:0.5605,NDCG@20:0.3058,HR@50:0.7737,NDCG@50:0.3479)
+INFO:root:
+Test After Training: (HR@5:0.2903,NDCG@5:0.1988,HR@10:0.3911,NDCG@10:0.2314,HR@20:0.5132,NDCG@20:0.2622,HR@50:0.7399,NDCG@50:0.3069)
+INFO:root:Saving top-100 recommendation results to: ../log/SelfGNN/SelfGNN__Grocery_and_Gourmet_Food__0__lr=0/rec-SelfGNN-dev.csv
+INFO:root:dev Prediction results saved!
+INFO:root:Saving top-100 recommendation results to: ../log/SelfGNN/SelfGNN__Grocery_and_Gourmet_Food__0__lr=0/rec-SelfGNN-test.csv
+INFO:root:test Prediction results saved!
+INFO:root:
+--------------------------------------------- END: 2025-12-24 20:58:17 ---------------------------------------------
