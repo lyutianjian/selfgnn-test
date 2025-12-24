@@ -16,11 +16,12 @@ REPO_ROOT = Path(__file__).parent.absolute()
 
 # Common hyperparameters
 COMMON_ARGS = {
-    "epoch": 1,              # Quick test: 1 epoch only
-    "batch_size": 2048,      # 8GB VRAM: can use larger batch for faster training
-    "num_workers": 0,        # Must be 0 on Windows
-    "gpu": 0,
+    "epoch": 100,              # Quick test: 1 epoch only
+    "batch_size": 8192,      # 8GB VRAM: can use larger batch for faster training
+    "num_workers": 16,        # Must be 0 on Windows
     "pin_memory": 1,
+    "persistent_workers":True,
+    "emb_size": 128,
 }
 
 # Models to compare

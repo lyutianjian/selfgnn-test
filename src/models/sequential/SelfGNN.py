@@ -27,8 +27,6 @@ class SelfGNN(SequentialModel):
                             help='Number of GRU layers.')
         parser.add_argument('--num_heads', type=int, default=4,
                             help='Number of attention heads.')
-        parser.add_argument('--dropout', type=float, default=0.1,
-                            help='Dropout probability.')
         parser.add_argument('--graph_num', type=int, default=6,
                             help='Number of time-based graphs (time periods).')
         parser.add_argument('--time_periods', type=int, default=6,
